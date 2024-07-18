@@ -6,11 +6,11 @@ function addPerson() {
     const newPersonDiv = document.createElement('div');
     newPersonDiv.classList.add('person-input');
     newPersonDiv.innerHTML = `
-        <label for="name${personCount}">Name: </label>
-        <input type="text" id="name${personCount}" required>
-        <label for="amount${personCount}">Amount: </label>
-        <input type="number" id="amount${personCount}" required>
-        <label for="share${personCount}">Share (%): </label>
+        <label for="name${personCount}">Name:</label>
+        <input type="text" id="name${personCount}" placeholder="Person ${personCount}" required>
+        <label for="amount${personCount}">Amount:</label>
+        <input type="number" id="amount${personCount}" placeholder="$0.00" required>
+        <label for="share${personCount}">Share (%):</label>
         <input type="number" id="share${personCount}" value="100" required>`;
     contributionsDiv.appendChild(newPersonDiv);
 }
@@ -67,11 +67,11 @@ function resetFields() {
     document.getElementById('expenseDescription').value = '';
     document.getElementById('contributions').innerHTML = `
         <div class="person-input">
-            <label for="name1">Name: </label>
-            <input type="text" id="name1" required>
-            <label for="amount1">Amount: </label>
-            <input type="number" id="amount1" required>
-            <label for="share1">Share (%): </label>
+            <label for="name1">Name:</label>
+            <input type="text" id="name1" placeholder="Person 1" required>
+            <label for="amount1">Amount:</label>
+            <input type="number" id="amount1" placeholder="$0.00" required>
+            <label for="share1">Share (%):</label>
             <input type="number" id="share1" value="100" required>
         </div>`;
     personCount = 1;
