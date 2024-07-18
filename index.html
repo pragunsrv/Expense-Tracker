@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Expense Splitter</title>
+    <title>Expense Splitter with Individual Contributions</title>
 </head>
 <body>
     <h1>Expense Splitter</h1>
-    <label for="totalAmount">Total Amount: </label>
-    <input type="number" id="totalAmount" required>
-    <br>
-    <label for="numPeople">Number of People: </label>
-    <input type="number" id="numPeople" required>
+    <div id="contributions">
+        <div>
+            <label for="amount1">Amount by Person 1: </label>
+            <input type="number" id="amount1" required>
+        </div>
+    </div>
+    <button onclick="addPerson()">Add Person</button>
     <br>
     <button onclick="splitExpense()">Split Expense</button>
+    <button onclick="resetFields()">Reset</button>
     <p id="result"></p>
+    <p id="error" style="color: red;"></p>
     <script src="script.js"></script>
 </body>
 </html>
