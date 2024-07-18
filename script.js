@@ -4,20 +4,28 @@ function addPerson() {
     personCount++;
     const contributionsDiv = document.getElementById('contributions');
     const newPersonDiv = document.createElement('div');
-    newPersonDiv.innerHTML = `<label for="amount${personCount}">Amount by Person ${personCount}: </label><input type="number" id="amount${personCount}" required>`;
+    newPersonDiv.classList.add('person-input');
+    newPersonDiv.innerHTML = `
+        <label for="name${personCount}">Name: </label>
+        <input type="text" id="name${personCount}" required>
+        <label for="amount${personCount}">Amount: </label>
+        <input type="number" id="amount${personCount}" required>`;
     contributionsDiv.appendChild(newPersonDiv);
 }
 
 function splitExpense() {
     let totalAmount = 0;
     let amounts = [];
+    let names = [];
     for (let i = 1; i <= personCount; i++) {
+        const name = document.getElementById(`name${i}`).value;
         const amount = parseFloat(document.getElementById(`amount${i}`).value);
-        if (!isNaN(amount)) {
+        if (!isNaN(amount) && name.trim() !== "") {
             totalAmount += amount;
             amounts.push(amount);
+            names.push(name);
         } else {
-            document.getElementById('error').innerText = 'Please enter valid amounts.';
+            document.getElementById('error').innerText = 'Please enter valid names and amounts.';
             document.getElementById('result').innerText = '';
             document.getElementById('detailedResult').innerHTML = '';
             return;
@@ -29,7 +37,7 @@ function splitExpense() {
         let detailedResult = '';
         for (let i = 0; i < amounts.length; i++) {
             const diff = amounts[i] - amountPerPerson;
-            detailedResult += `<li>Person ${i + 1} should ${diff >= 0 ? 'receive' : 'pay'} $${Math.abs(diff).toFixed(2)}</li>`;
+            detailedResult += `<li>${names[i]} should ${diff >= 0 ? 'receive' : 'pay'} $${Math.abs(diff).toFixed(2)}</li>`;
         }
         document.getElementById('result').innerText = `Each person should pay: $${amountPerPerson.toFixed(2)}`;
         document.getElementById('error').innerText = '';
@@ -41,8 +49,10 @@ function splitExpense() {
 
 function resetFields() {
     document.getElementById('contributions').innerHTML = `
-        <div>
-            <label for="amount1">Amount by Person 1: </label>
+        <div class="person-input">
+            <label for="name1">Name: </label>
+            <input type="text" id="name1" required>
+            <label for="amount1">Amount: </label>
             <input type="number" id="amount1" required>
         </div>`;
     personCount = 1;
